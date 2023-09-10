@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+// Function to find the maximum product subarray
+void maxProductSubarray(int arr[], int n) {
+    if (n == 0) {
+        printf("The array is empty.\n");
+        return;
+    }
+
+    int max_ending_here = arr[0];
+    int min_ending_here = arr[0];
+    int max_so_far = arr[0];
+
+    for (int i = 1; i < n; i++) {
+        // Swap max and min if the current element is negative
+        if (arr[i] < 0) {
+            int temp = max_ending_here;
+            max_ending_here = min_ending_here;
+            min_ending_here = temp;
+        }
+
+        // Update the maximum and minimum ending here
+        max_ending_here = (arr[i] > (max_ending_here * arr[i])) ? arr[i] : (max_ending_here * arr[i]);
+        min_ending_here = (arr[i] < (min_ending_here * arr[i])) ? arr[i] : (min_ending_here * arr[i]);
+
+        // Update the maximum product if needed
+        if (max_ending_here > max_so_far) {
+            max_so_far = max_ending_here;
+        }
+    }
+
+    printf("Maximum product subarray: %d\n", max_so_far);
+}
+
+int main() {
+    int arr[] = {2, 3, -2, 4};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    maxProductSubarray(arr, n);
+
+    return 0;
+}
