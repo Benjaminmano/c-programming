@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <limits.h>
+
+int main() {
+    int n;
+
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &n);
+
+    if (n <= 1) {
+        printf("Please enter at least two elements for the array.\n");
+        return 1; // Return a non-zero value to indicate an error
+    }
+
+    int arr[n];
+
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    int minElement = arr[0];
+    int maxDifference = INT_MIN;
+
+    for (int i = 1; i < n; i++) {
+        if (arr[i] < minElement) {
+            minElement = arr[i];
+        } else {
+            int currentDifference = arr[i] - minElement;
+            if (currentDifference > maxDifference) {
+                maxDifference = currentDifference;
+            }
+        }
+    }
+
+    if (maxDifference == INT_MIN) {
+        printf("There is no maximum difference in the array.\n");
+    } else {
+        printf("Maximum difference in the array: %d\n", maxDifference);
+    }
+
+    return 0;
+}
