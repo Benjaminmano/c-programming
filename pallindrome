@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <ctype.h> // for toupper() function
+
+// Function to check if a string is a palindrome
+bool isPalindrome(const char *str) {
+    int left = 0;
+    int right = strlen(str) - 1;
+
+    while (left < right) {
+        // Ignore spaces and case differences by converting characters to uppercase
+        char leftChar = toupper(str[left]);
+        char rightChar = toupper(str[right]);
+
+        if (leftChar != rightChar) {
+            return false; // Characters don't match, not a palindrome
+        }
+
+        left++;
+        right--;
+    }
+
+    return true; // It's a palindrome
+}
+
+int main() {
+    char input[100];
+
+    printf("Enter a string: ");
+    fgets(input, sizeof(input), stdin);
+
+    // Remove the trailing newline character from input
+    input[strcspn(input, "\n")] = '\0';
+
+    if (isPalindrome(input)) {
+        printf("%s is a palindrome.\n", input);
+    } else {
+        printf("%s is not a palindrome.\n", input);
+    }
+
+    return 0;
+}
