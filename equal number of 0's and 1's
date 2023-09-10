@@ -1,0 +1,45 @@
+#include <stdio.h>
+
+int main() {
+    int n;
+
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &n);
+
+    if (n <= 0) {
+        printf("Please enter a positive integer for the number of elements.\n");
+        return 1; // Return a non-zero value to indicate an error
+    }
+
+    int arr[n];
+
+    printf("Enter %d elements (0s and 1s only):\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+
+        if (arr[i] != 0 && arr[i] != 1) {
+            printf("Please enter only 0s and 1s.\n");
+            return 1; // Return an error if an element other than 0 or 1 is entered
+        }
+    }
+
+    int count0 = 0;
+    int count1 = 0;
+
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == 0) {
+            count0++;
+        } else {
+            count1++;
+        }
+
+        if (count0 == count1) {
+            printf("The array contains an equal number of 0s and 1s.\n");
+            return 0; // Return 0 to indicate success
+        }
+    }
+
+    printf("The array does not contain an equal number of 0s and 1s.\n");
+
+    return 0;
+}
