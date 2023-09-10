@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main() {
+    int n;
+
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &n);
+
+    if (n <= 0) {
+        printf("Please enter a positive integer for the number of elements.\n");
+        return 1; // Return a non-zero value to indicate an error
+    }
+
+    int arr[n];
+
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    int start, end;
+
+    printf("Enter the starting index of the subarray (0 to %d): ", n - 1);
+    scanf("%d", &start);
+
+    if (start < 0 || start >= n) {
+        printf("Invalid starting index. Please enter a valid index.\n");
+        return 1; // Return an error
+    }
+
+    printf("Enter the ending index of the subarray (%d to %d): ", start, n - 1);
+    scanf("%d", &end
