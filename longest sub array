@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+// Structure to store the prefix sum and its corresponding index
+struct PrefixSum {
+    int sum;
+    int index;
+};
+
+// Function to find the longest subarray with the given sum
+void findLongestSubarrayWithSum(int arr[], int n, int targetSum) {
+    // Create a dictionary (hash table) to store prefix sums
+    struct PrefixSum* prefixSums = (struct PrefixSum*)malloc(n * sizeof(struct PrefixSum));
+
+    int currentSum = 0;
+    int maxLength = 0;
+    int endIndex = -1;
+
+    for (int i = 0; i < n; i++) {
+        currentSum += arr[i];
+
+        // If the current sum is equal to the target sum, update maxLength and endIndex
+        if (currentSum == targetSum) {
+            maxLength = i + 1;
+            endIndex = i;
+        }
+
+        // Check if (currentSum - targetSum) exists in the dictionary
+        int diff = currentSum - targetSum;
+        for (int j = 0; j < i; j++) {
+            if (prefixSums[j].sum == diff) {
+                if (i - prefixSums[j].index > maxLength) {
+                    maxLength = i - prefixSums[j].index;
+                    endIndex = i;
+                }
+            }
+        }
+
+        // Store the current prefix sum and its index in the dictionary
+        prefixSums[i].sum = currentSum;
+        prefixSums[i].index = i;
+    }
+
+    // Free the dynamically allocated memory
+    free(prefixSums);
+
+    if (
