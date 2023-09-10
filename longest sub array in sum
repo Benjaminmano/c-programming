@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+int main() {
+    int n;
+
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &n);
+
+    if (n <= 0) {
+        printf("Please enter a positive integer for the number of elements.\n");
+        return 1; // Return a non-zero value to indicate an error
+    }
+
+    int arr[n];
+
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    int indexToDelete;
+
+    printf("Enter the index of the element to delete (0 to %d): ", n - 1);
+    scanf("%d", &indexToDelete);
+
+    if (indexToDelete < 0 || indexToDelete >= n) {
+        printf("Invalid index. Please enter a valid index.\n");
+        return 1; // Return a non-zero value to indicate an error
+    }
+
+    // Shift elements to delete the element at the specified index
+    for (int i = indexToDelete; i < n - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+
+    n--; // Decrease the size of the array
+
+    printf("Array after deleting element at index %d:\n", indexToDelete);
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}
